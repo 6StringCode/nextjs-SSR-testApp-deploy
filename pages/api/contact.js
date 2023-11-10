@@ -25,8 +25,11 @@ export default async function handler(req, res) {
 
     let client
 
+    const connectionString = `mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@${process.env.mongodb_clustername}.sxqpezu.mongodb.net/${process.env.mongodb_database}?retryWrites=true&w=majority`
+
     try {
-      client = await MongoClient.connect(process.env.MONGO_URI)
+      // client = await MongoClient.connect(process.env.MONGO_URI)
+      client = await MongoClient.connect(connectionString)
     } catch (err) {
       res.status(500).json({ message: 'Could not connect to database.' })
       return
